@@ -7,10 +7,10 @@ import com.tilmate.backend.member.dto.SignupRequestDto;
 import com.tilmate.backend.member.dto.SignupResponseDto;
 import com.tilmate.backend.member.entity.Member;
 import com.tilmate.backend.member.repository.MemberRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -31,7 +31,6 @@ public class MemberService {
                 .email(dto.getEmail())
                 .password(passwordEncoder.encode(dto.getPassword()))
                 .name(dto.getName())
-                .createdAt(LocalDateTime.now())
                 .build();
 
         Member saved = memberRepository.save(member);
@@ -43,7 +42,7 @@ public class MemberService {
                 .build();
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public LoginResponseDto login(LoginRequestDto dto){
 
         Member member = memberRepository.findByEmail(dto.getEmail())
