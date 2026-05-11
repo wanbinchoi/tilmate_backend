@@ -31,4 +31,9 @@ public class Til {
     private String content;
 
     private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate(){
+        this.createdAt = LocalDateTime.now();
+    }
 }
