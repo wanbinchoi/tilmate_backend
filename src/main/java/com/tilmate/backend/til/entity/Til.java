@@ -31,9 +31,20 @@ public class Til {
     private String content;
 
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     @PrePersist
     protected void onCreate(){
         this.createdAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate(){
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public void update(String title, String content){
+        this.title = title;
+        this.content = content;
     }
 }

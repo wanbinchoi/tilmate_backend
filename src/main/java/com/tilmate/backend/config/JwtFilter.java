@@ -30,7 +30,8 @@ public class JwtFilter extends OncePerRequestFilter {
         if (header != null && header.startsWith("Bearer ")) {
             String token = header.substring(7);
             if (jwtProvider.validateToken(token)) {
-                String memberId = jwtProvider.getClaims(token).getSubject();
+                // 이거 컨트롤러에서 security principal 사용하려면 매번 long으로 파싱해야해서 여기서 아예 long으로 받게끔 만들었음
+                Long memberId = Long.parseLong(jwtProvider.getClaims(token).getSubject());
                 UsernamePasswordAuthenticationToken auth =
                         new UsernamePasswordAuthenticationToken(memberId, null, List.of());
                 SecurityContextHolder.getContext().setAuthentication(auth);
