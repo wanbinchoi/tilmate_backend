@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 public class TilResponseDto {
     private Long id;
     private Long memberId;
+    private String authorName;
     private String title;
     private String content;
     private LocalDateTime createdAt;

@@ -11,6 +11,6 @@ import java.util.List;
  * 특정 멤버의 TIL 조회 같은 경우는 직접 만들어야함
  */
 public interface TilRepository extends JpaRepository<Til, Long> {
-    // 특정 멤버의 Til들만 조회하는 메소드
     List<Til> findByMemberId(Long memberId);
+    List<Til> findAllByOrderByCreatedAtDesc();
 }
